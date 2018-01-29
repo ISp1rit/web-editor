@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+  	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Web Editor</title>
+		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="bower_components/owl.carousel/dist/assets/owl.carousel.min.css" />
+		<link rel="stylesheet" href="src/css/style.css" />
+	</head>
+	<body>
+		<div class="container">
+
+      <!-- Toolbar -->
+			<div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
+				<div class="btn-group">
+					<a class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+						title="Font Size"><i class="fa fa-text-height"></i>&nbsp;<b
+						class="caret"></b>
+					</a>
+					<ul class="dropdown-menu font-sizes">
+						<li><a data-edit="fontSize 5" class="fs-Five">Huge</a></li>
+						<li><a data-edit="fontSize 3" class="fs-Three">Normal</a></li>
+						<li><a data-edit="fontSize 1" class="fs-One">Small</a></li>
+					</ul>
+				</div>
+				<div class="btn-group">
+					<a class="btn btn-default" data-edit="bold" title="Bold (Ctrl/Cmd+B)"><i class="fa fa-bold"></i></a>
+					<a class="btn btn-default" data-edit="italic" title="Italic (Ctrl/Cmd+I)"><i class="fa fa-italic"></i></a>
+					<a class="btn btn-default" data-edit="strikethrough" title="Strikethrough"><i class="fa fa-strikethrough"></i></a>
+					<a class="btn btn-default" data-edit="underline" title="Underline (Ctrl/Cmd+U)"><i class="fa fa-underline"></i></a>
+				</div>
+				<div class="btn-group">
+					<a class="btn btn-default" data-edit="insertunorderedlist" title="Bullet list"><i class="fa fa-list-ul"></i></a>
+					<a class="btn btn-default" data-edit="insertorderedlist" title="Number list"><i class="fa fa-list-ol"></i></a>
+					<a class="btn btn-default" data-edit="outdent" title="Reduce indent (Shift+Tab)"><i class="fa fa-outdent"></i></a>
+					<a class="btn btn-default" data-edit="indent" title="Indent (Tab)"><i class="fa fa-indent"></i></a>
+				</div>
+				<div class="btn-group">
+					<a class="btn btn-default" data-edit="justifyleft" title="Align Left (Ctrl/Cmd+L)"><i class="fa fa-align-left"></i></a>
+					<a class="btn btn-default" data-edit="justifycenter" title="Center (Ctrl/Cmd+E)"><i class="fa fa-align-center"></i></a>
+					<a class="btn btn-default" data-edit="justifyright" title="Align Right (Ctrl/Cmd+R)"><i class="fa fa-align-right"></i></a>
+					<a class="btn btn-default" data-edit="justifyfull" title="Justify (Ctrl/Cmd+J)"><i class="fa fa-align-justify"></i></a>
+				</div>
+				<div class="btn-group">
+					<a class="btn btn-default dropdown-toggle" data-toggle="dropdown" title="Hyperlink"><i class="fa fa-link"></i></a>
+					<div class="dropdown-menu input-append hyperlink">
+						<input class="form-control" placeholder="URL..." type="text" data-edit="createLink" />
+						<button class="btn ui-btn btn-change" type="button">Add</button>
+					</div>
+				</div>
+				<div class="btn-group">
+					<a class="btn btn-default" data-edit="unlink" title="Remove Hyperlink"><i class="fa fa-unlink"></i></a>
+					<span class="btn btn-default" title="Upload picture" data-toggle="modal" data-target="#imgModal"><i class="fa fa-picture-o"></i></span>
+				</div>
+				<div class="btn-group">
+					<a class="btn btn-default" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="fa fa-undo"></i></a>
+					<a class="btn btn-default" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="fa fa-repeat"></i></a>
+				</div>
+			</div>
+
+			<div id="editor" class="lead" data-placeholder="Some text..."></div>
+
+      <!-- Modal -->
+      <div id="imgModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+
+            <div class="modal-body">
+
+              <!-- Modal Upload -->
+              <div class="content-upload">
+      					<input type="file" id="upload-file" class="image-input">
+                <label class="btn-upload-image" for="upload-file">
+                  <i class="fa fa-upload" aria-hidden="true"></i>
+                  <span>Choose image…</span>
+                </label>
+              </div>
+
+              <!-- Modal Edit -->
+              <div class="content-edit">
+
+                <div class="image-preview-wrapper">
+                  <div class="image-preview"></div>
+                  <div class="toolbar-panel">
+                    <div class="rotate">
+                      <i class="fa fa-undo rotate-left js-rotate-left"></i>
+                      <i class="fa fa-repeat rotate-right js-rotate-right"></i>
+                    </div>
+                    <div class="control js-image-width">
+                      <span>Width:</span>
+                      <input type="text" class="form-control js-width">
+                    </div>
+                    <div class="control js-image-width">
+                      <span>Height:</span>
+                      <input type="text" class="form-control js-height">
+                    </div>
+                    <div class="btn-wrapper">
+                      <button type="button" class="btn ui-btn btn-save-edit js-btn-save-edit">Save</button>
+                      <button type="button" class="btn ui-btn btn-back js-btn-back">Back</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="image-themes">
+                  <div class="owl-carousel owl-theme">
+                    <div class="theme" theme="ORIGINAL">
+                      <div class="theme-name">Original</div>
+                    </div>
+                    <div class="theme theme-desaturate" theme="DESATURATE">
+                      <div class="theme-name">Desaturate</div>
+                    </div>
+                    <div class="theme theme-blur" theme="BLUR">
+                      <div class="theme-name">Blur</div>
+                    </div>
+                    <div class="theme theme-brighten" theme="BRIGHTEN">
+                      <div class="theme-name">Brighten</div>
+                    </div>
+                    <div class="theme theme-contrast" theme="CONTRAST">
+                      <div class="theme-name">Contrast</div>
+                    </div>
+                    <div class="theme theme-invert" theme="INVERT">
+                      <div class="theme-name">Invert</div>
+                    </div>
+                    <div class="theme theme-sepia" theme="SEPIA">
+                      <div class="theme-name">Sepia</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn ui-btn btn-change js-btn-change">Change</button>
+              <button type="button" class="btn ui-btn btn-edit js-btn-edit">Edit</button>
+              <button type="button" class="btn ui-btn btn-upload js-btn-upload">Upload</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+		<script src="bower_components/jquery/dist/jquery.min.js"></script>
+		<script src="bower_components/jquery.hotkeys/jquery.hotkeys.js"></script>
+		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+		<script src="bower_components/owl.carousel/dist/owl.carousel.min.js"></script>
+		<script src="src/js/core.js"></script>
+		<script src="src/js/main.js"></script>
+	</body>
+</html>
